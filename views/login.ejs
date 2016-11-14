@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <!--<link rel='stylesheet' href='/stylesheets/wijetstyle.css'>-->
+
+</head>
+<body>
+<div id="chat-login-wrapper">
+    <h1>Welcome to WireMe</h1>
+    <form id="chat-signup">
+        <input id="user_name" type="text" placeholder="enter your username" autofocus/>
+        <input id="user_password" type="password" placeholder="enter your password"/>
+        <input id="submit_button" type="button" value="Submit"/>
+    </form><!-- end of chat-signup form -->
+</div><!-- end of chat-login-wrapper -->
+
+
+<script src="http://127.0.0.1:3001/socket.io/socket.io.js"></script>
+<script src="/controllers/login.js"></script>
+
+<% include parts/footer.ejs %>
+</body>
+</html>
