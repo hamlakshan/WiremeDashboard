@@ -57,9 +57,11 @@
             user_password_input.value = '';
         });
 
-        server.on('redirect', function(href){
-            sessionStorage.setItem('ss_user_name', user_name_input.value);
-            window.location.href=href;
+        server.on('valid', function(res){
+            //alert("details are  " + JSON.stringify(res));
+            sessionStorage.setItem('ss_user_id', res[0].user_id);
+            sessionStorage.setItem('ss_widgets', JSON.stringify(res));
+            window.location.href='http://localhost:3000/';
         });
     }
 })();

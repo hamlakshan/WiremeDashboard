@@ -1,0 +1,56 @@
+var mongo = require('mongodb').MongoClient;
+
+//mongo function
+mongo db for user authentication
+mongo.connect('mongodb://127.0.0.1/wireme', function (err, db) {
+
+    if (err) {
+        console.log('Unable to connect to the mongoDB server. Error:', err);
+    } else {
+        console.log("Connected to mongoDB successfully!");
+
+        io.sockets.on('connection', function (socket) {
+
+            //for login function
+            socket.on('login', function (login_info) {
+                var this_user_name = login_info.user_name,
+                    this_user_password = login_info.user_password;
+
+                if (this_user_name === '' || this_user_password === '') {
+                    socket.emit('alert', 'You must fill in both fields');
+                } else {
+                    var users = db.collection('users');
+                    users.find().toArray(function (err, res) {
+                        if (err) throw err;
+
+                        var found = false,
+                            location = -1;
+
+                        if (res.length) {
+                            for (i = 0; i < res.length; i++) {
+                                if (res[i].user_name === this_user_name) {
+                                    found = true;
+
+                                    if (res[i].password === this_user_password) {
+                                       // socket.emit('alert', 'Login successful');
+                                        socket.emit('redirect', 'http://localhost:3000/');
+                                    } else {
+                                        socket.emit('alert', 'Please retry password');
+                                    }
+                                    break;
+                                }
+                            }
+
+                            if (!found) {
+                                socket.emit('alert', 'Sorry, could not find you. Please sign up.');
+                              //  socket.emit('redirect', 'about');
+                            }
+                        }
+                    })
+                }
+            });
+
+
+        });
+    }
+});

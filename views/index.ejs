@@ -2,56 +2,33 @@
 <html>
 <head>
     <title><%= title %></title>
-    <!--<link rel='stylesheet' href='/stylesheets/style.css'/>-->
-    <link rel='stylesheet' href='/stylesheets/wijetstyle.css'>
+    <link rel='stylesheet' href='/stylesheets/wijetsyle.css'/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <!--<link rel='stylesheet' href='/stylesheets/epoch.min.css'/>-->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script type="text/javascript" src="/javascripts/smoothie.js"></script>
+    <script type="text/javascript" src="/javascripts/d3.min.js"></script>
 
-
+    <!--<script type="text/javascript" src="/javascripts/epoch.min.js"></script>-->
     <script src="http://127.0.0.1:3001/socket.io/socket.io.js"></script>
     <script src="/controllers/index.js"></script>
 
 </head>
 <body>
-<% include parts/header.ejs %>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 " style=" ">
-            Temperature
-            <h1 id="gage"></h1>
-                <div id="g1" class="gauge"></div>
-        </div>
-        <div class="col-md-6" style="  height: 245px;">
-            Temperature Change With Time
-            <div style="padding:20px;">
-                <canvas id="linechart" width="500" height="200" style="border: solid 0.5px;"></canvas>
-            </div>
-
-        </div>
-    </div>
-
-</div>
-
-<script>
-    var smoothie = new SmoothieChart({
-    grid: { strokeStyle:'rgb(255,255,255)', fillStyle:'rgb(255, 255, 255)',
-            lineWidth: 1, millisPerLine: 250, verticalSections: 10, },
-    labels: { fillStyle:'rgb(100, 0, 0)' }
-    });
-    smoothie.streamTo(document.getElementById("linechart"))
-    var line1 = new TimeSeries();
-    line1.append(new Date().getTime(),10);
-    smoothie.addTimeSeries(line1,
-            { strokeStyle:'rgb(0, 255, 0)', fillStyle:'rgba(255, 255, 255, 0.4)', lineWidth:3 }
-    );
-</script>
 
 
-<% include parts/footer.ejs %>
+<% include common/header.ejs %>
+
+    <% include widgets/line_chart.ejs %>
+    <% include widgets/gauge.ejs %>
+    <% include widgets/google_gauge.ejs %>
+
+<% include common/footer.ejs %>
 
 </body>
 </html>

@@ -5,9 +5,10 @@
 }
 
 .gauge {
-    width: 450px;
-    height: 450px;
+    width: 150px;
+    height: 150px;
 }
+
 
 a:link.button,
 a:active.button,
@@ -16,3 +17,22 @@ a:hover.button {
     margin: 30px 5px 0 2px;
     padding: 7px 13px;
 }
+
+
+.my_widget {
+    background-color:#f7f8f9;
+    border-radius: 10px;
+    width: 31.5%;
+    margin: 10px;
+    height: 300px;
+    border: solid 0.5px #adadad;
+
+}
+
+
+
+#myChart {
+    height:100%;
+    width:100%;
+}
+
